@@ -19,15 +19,15 @@ public class AppTest {
 	@Test
 	public void testAppHasAGreeting() throws MalformedURLException, Exception {
 		DesiredCapabilities caps = DesiredCapabilities.android();
-		caps.setCapability("deviceName", "CB5A26694T");
+		caps.setCapability("deviceName", "192.168.151.101:5555");
+		caps.setCapability("app", getClass().getResource("selendroid.apk").getPath().substring(1));
 		caps.setCapability("platformName", "Android");
-		caps.setCapability("app", "E:\\Automation\\Appium_android\\android_app\\selendroid-test-app-0.17.0.apk");
-
+		
 		// Start android driver I used 4727 port by default it will be 4723
 		driver = new AndroidDriver<WebElement>(new URL("http://localhost:4723/wd/hub"), caps);
 
 		// Specify the implicit wait of 5 second
-		driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 		// Enter the text in textbox
 		driver.findElement(By.xpath("//android.widget.EditText[@content-desc='my_text_fieldCD']"))
@@ -40,7 +40,7 @@ public class AppTest {
 		Thread.sleep(10000);
 
 		// close the application
-		driver.quit();
-
+		driver.quit();	
+		
 	}
 }

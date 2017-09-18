@@ -27,7 +27,6 @@ ext/libtool
 
 # Eclipse files we don't want to track
 /build
-/bin
 /.settings/
 /test-output
 .project
