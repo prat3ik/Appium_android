@@ -6,41 +6,108 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import io.appium.java_client.android.AndroidDriver;
 
 public class AppTest {
-	AndroidDriver<WebElement> driver;
 
-	@Test
-	public void testAppHasAGreeting() throws MalformedURLException, Exception {
-		DesiredCapabilities caps = DesiredCapabilities.android();
-		caps.setCapability("deviceName", "192.168.151.101:5555");
-		caps.setCapability("app", getClass().getResource("selendroid.apk").getPath().substring(1));
-		caps.setCapability("platformName", "Android");
-		
-		// Start android driver I used 4727 port by default it will be 4723
-		driver = new AndroidDriver<WebElement>(new URL("http://localhost:4723/wd/hub"), caps);
+	// APPIUM CONFIGURATION
+	public final static String APPIUM_SERVER_URL = "http://localhost:4723/wd/hub";
+	public final static String APP_NAME = "pratik_sample.apk";
+	public final String APP_PATH = getClass().getResource(APP_NAME).getPath().substring(1);
+	public final static String PLATFORM_NAME = "Android";
+	public final static String DEVICE_NAME = "CB5A26694T"; // Change Device Name
+	public final DesiredCapabilities caps = DesiredCapabilities.android();
+	public AndroidDriver<WebElement> driver;
+
+	// LOCATORS
+	final String signup_page = "com.example.pratik.myapplication:id/signup";
+	final String login_page = "com.example.pratik.myapplication:id/login";
+	final String login_username_field = "com.example.pratik.myapplication:id/loginUsernameEmail";
+	final String login_password_field = "com.example.pratik.myapplication:id/loginPassword";
+	final String login_button = "com.example.pratik.myapplication:id/loginButton";
+	final String welcome_text_field = "com.example.pratik.myapplication:id/welcomeText";
+	final String logout_button = "com.example.pratik.myapplication:id/logout";
+
+	/**
+	 * This would return the Android WebDriver instance
+	 * 
+	 * @return
+	 * @throws MalformedURLException
+	 */
+	public AndroidDriver<WebElement> getAndroidDriver() throws MalformedURLException {
+		AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(new URL(APPIUM_SERVER_URL), caps);
 
 		// Specify the implicit wait of 5 second
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		return driver;
+	}
 
-		// Enter the text in textbox
-		driver.findElement(By.xpath("//android.widget.EditText[@content-desc='my_text_fieldCD']"))
-				.sendKeys("Mukesh Selenium Appium");
+	@BeforeMethod
+	public void beforeMethod() throws MalformedURLException {
+		caps.setCapability("deviceName", DEVICE_NAME);
+		caps.setCapability("app", APP_PATH);
+		caps.setCapability("platformName", PLATFORM_NAME);
+		driver = getAndroidDriver();
+	}
 
-		// click on registration button
-		driver.findElement(By.id("io.selendroid.testapp:id/startUserRegistration")).click();
+	/**
+	 * This test would verify whether user can Login successfully
+	 * 
+	 * @throws MalformedURLException
+	 * @throws Exception
+	 */
+	@Test
+	public void verifyUserCanLogin() throws MalformedURLException, Exception {
+		String username = "Pratik";
+		String password = "password";
 
-		// Wait for 10 second
-		Thread.sleep(10000);
+		// AndroidDriver<WebElement> driver = getAndroidDriver();
 
+		// Click on Login button for Navigating Login page
+		driver.findElement(By.id(login_page)).click();
+
+		// Static wait for New page to be opened
+		Thread.sleep(2000);
+
+		// Fill Username/Email field
+		driver.findElement(By.id(login_username_field)).sendKeys(username);
+		driver.hideKeyboard();
+
+		// Fill Password field
+		driver.findElement(By.id(login_password_field)).sendKeys(password);
+		driver.hideKeyboard();
+
+		// Click on Login button
+		driver.findElement(By.id(login_button)).click();
+
+		// Static wait for New page to be opened
+		Thread.sleep(2000);
+
+		// Get the welcome text and Logout button elements
+		WebElement welcome_text_element = driver.findElement(By.id(welcome_text_field));
+		WebElement logout_element = driver.findElement(By.id(logout_button));
+
+		// Assert whether elements are present or not
+		Assert.assertTrue(welcome_text_element.isDisplayed(), "Welcome Text is not being displayed");
+		Assert.assertTrue(logout_element.isDisplayed(), "Logout button is not being displayed");
+
+		// Assert whether Welcome Text contains typed Username/Email
+		Assert.assertTrue(welcome_text_element.getText().contains(username),
+				"Username/Email: '" + username + "' is not displayed!");
+	}
+
+	@AfterMethod
+	public void afterMethod() {
 		// close the application
-		driver.quit();	
-		
+		driver.quit();
 	}
 }
