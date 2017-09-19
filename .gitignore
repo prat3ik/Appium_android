@@ -31,3 +31,4 @@ ext/libtool
 /test-output
 .project
 /.gradle/
+/bin/

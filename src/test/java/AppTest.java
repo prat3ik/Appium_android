@@ -34,6 +34,10 @@ public class AppTest {
 	final String login_username_field = "com.example.pratik.myapplication:id/loginUsernameEmail";
 	final String login_password_field = "com.example.pratik.myapplication:id/loginPassword";
 	final String login_button = "com.example.pratik.myapplication:id/loginButton";
+	final String signup_username_field = "com.example.pratik.myapplication:id/signupUsername";
+	final String signup_email_field = "com.example.pratik.myapplication:id/signupEmail";
+	final String signup_password_field = "com.example.pratik.myapplication:id/signupPassword";
+	final String signup_button = "com.example.pratik.myapplication:id/signupButton";
 	final String welcome_text_field = "com.example.pratik.myapplication:id/welcomeText";
 	final String logout_button = "com.example.pratik.myapplication:id/logout";
 
@@ -70,7 +74,101 @@ public class AppTest {
 		String username = "Pratik";
 		String password = "password";
 
-		// AndroidDriver<WebElement> driver = getAndroidDriver();
+		// Click on Login button for Navigating Login page
+		driver.findElement(By.id(login_page)).click();
+
+		// Static wait for New page to be opened
+		Thread.sleep(2000);
+
+		// Fill Username/Email field
+		driver.findElement(By.id(login_username_field)).sendKeys(username);
+		driver.hideKeyboard();
+
+		// Fill Password field
+		driver.findElement(By.id(login_password_field)).sendKeys(password);
+		driver.hideKeyboard();
+
+		// Click on Login button
+		driver.findElement(By.id(login_button)).click();
+
+		// Static wait for New page to be opened
+		Thread.sleep(2000);
+
+		// Get the welcome text and Logout button elements
+		WebElement welcome_text_element = driver.findElement(By.id(welcome_text_field));
+		WebElement logout_element = driver.findElement(By.id(logout_button));
+
+		// Assert whether elements are present or not
+		Assert.assertTrue(welcome_text_element.isDisplayed(), "Welcome Text is not being displayed");
+		Assert.assertTrue(logout_element.isDisplayed(), "Logout button is not being displayed");
+
+		// Assert whether Welcome Text contains typed Username/Email
+		Assert.assertTrue(welcome_text_element.getText().contains(username),
+				"Username/Email: '" + username + "' is not displayed!");
+	}
+
+	/**
+	 * This test would verify whether user can Sign up successfully
+	 * 
+	 * @throws MalformedURLException
+	 * @throws Exception
+	 */
+	@Test
+	public void verifyUserCanSignup() throws MalformedURLException, Exception {
+		String username = "Pratik";
+		String email = "pratikpatel@gmail.com";
+		String password = "password";
+
+		// Click on Login button for Navigating Login page
+		driver.findElement(By.id(login_page)).click();
+
+		// Static wait for New page to be opened
+		Thread.sleep(2000);
+
+		// Fill Username field
+		driver.findElement(By.id(signup_username_field)).sendKeys(username);
+		driver.hideKeyboard();
+
+		// Fill Email field
+		driver.findElement(By.id(signup_email_field)).sendKeys(username);
+		driver.hideKeyboard();
+
+		// Fill Password field
+		driver.findElement(By.id(signup_password_field)).sendKeys(password);
+		driver.hideKeyboard();
+
+		// Click on Sign Up button
+		driver.findElement(By.id(signup_button)).click();
+
+		// Static wait for New page to be opened
+		Thread.sleep(2000);
+
+		// Get the welcome text and Logout button elements
+		WebElement welcome_text_element = driver.findElement(By.id(welcome_text_field));
+		WebElement logout_element = driver.findElement(By.id(logout_button));
+
+		// Assert whether elements are present or not
+		Assert.assertTrue(welcome_text_element.isDisplayed(), "Welcome Text is not being displayed");
+		Assert.assertTrue(logout_element.isDisplayed(), "Logout button is not being displayed");
+
+		// Assert whether Welcome Text contains typed Username
+		Assert.assertTrue(welcome_text_element.getText().contains(username),
+				"Username: '" + username + "' is not displayed!");
+
+		// Assert whether Welcome Text contains typed Email
+		Assert.assertTrue(welcome_text_element.getText().contains(email), "Email: '" + email + "' is not displayed!");
+	}
+
+	/**
+	 * This test would verify whether user can Logout successfully
+	 * 
+	 * @throws MalformedURLException
+	 * @throws Exception
+	 */
+	@Test
+	public void verifyUserCanLogout() throws MalformedURLException, Exception {
+		String username = "Pratik";
+		String password = "password";
 
 		// Click on Login button for Navigating Login page
 		driver.findElement(By.id(login_page)).click();
@@ -103,6 +201,19 @@ public class AppTest {
 		// Assert whether Welcome Text contains typed Username/Email
 		Assert.assertTrue(welcome_text_element.getText().contains(username),
 				"Username/Email: '" + username + "' is not displayed!");
+
+		// Click on Log out button
+		logout_element.click();
+
+		// Get the Login and Sign Up button elements
+		WebElement login_button_element = driver.findElement(By.id(login_button));
+		WebElement signup_button_element = driver.findElement(By.id(signup_button));
+
+		// Assert whether Home page appears or not by verifying Login -
+		// and Sign Up buttons present
+		Assert.assertTrue(login_button_element.isDisplayed(), "Login button is not being displayed");
+		Assert.assertTrue(signup_button_element.isDisplayed(), "Sign Up button is not being displayed");
+
 	}
 
 	@AfterMethod
