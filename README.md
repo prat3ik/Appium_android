@@ -20,5 +20,6 @@
 <ul><li> Select Testcase name, Right click on them and 'Run As' > 'TestNG Test'</li></ul>
 <li> <b> Multiple Execution:</b></li>
 <ul><li> Right click on anywhere in AppTest.java file and 'Run As' > 'TestNG Test'</li></ul>
-
 </ul>
+
+Test Case Documentation: https://docs.google.com/document/d/13Agel9_rWXjKHtOD85U1U6ZeGySoUTnmbKjdAtN2r4M/edit
