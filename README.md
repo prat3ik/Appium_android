@@ -9,7 +9,7 @@
 <br>
 <li> Move to project directory and Open CMD to execute below commands for build</li>
   <ol>
-    <li><b>gradlew clean</b></li>
+    <li><b>gradlew clean</b>(When you clean the project then 'pratik_sample.apk' would be deleted from bin folder. Manually copy-paste it from project. In order to successful execution, 'pratik_sample.apk' file must be present in bin folder)</li>
     <li><b>gradlew eclipse</b></li>
     <li><b>gradlew build</b></li>
   </ol>
