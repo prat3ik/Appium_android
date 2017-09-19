@@ -29,8 +29,8 @@ public class AppTest {
 	public AndroidDriver<WebElement> driver;
 
 	// LOCATORS
-	final String signup_page = "com.example.pratik.myapplication:id/signup";
-	final String login_page = "com.example.pratik.myapplication:id/login";
+	final String signup_page_button = "com.example.pratik.myapplication:id/signup";
+	final String login_page_button = "com.example.pratik.myapplication:id/login";
 	final String login_username_field = "com.example.pratik.myapplication:id/loginUsernameEmail";
 	final String login_password_field = "com.example.pratik.myapplication:id/loginPassword";
 	final String login_button = "com.example.pratik.myapplication:id/loginButton";
@@ -75,7 +75,7 @@ public class AppTest {
 		String password = "password";
 
 		// Click on Login button for Navigating Login page
-		driver.findElement(By.id(login_page)).click();
+		driver.findElement(By.id(login_page_button)).click();
 
 		// Static wait for New page to be opened
 		Thread.sleep(2000);
@@ -103,8 +103,8 @@ public class AppTest {
 		Assert.assertTrue(logout_element.isDisplayed(), "Logout button is not being displayed");
 
 		// Assert whether Welcome Text contains typed Username/Email
-		Assert.assertTrue(welcome_text_element.getText().contains(username),
-				"Username/Email: '" + username + "' is not displayed!");
+		Assert.assertTrue(welcome_text_element.getText().contains(username), "Username/Email: '" + username
+				+ "' is not displayed!, The Text found is: " + welcome_text_element.getText());
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class AppTest {
 		String password = "password";
 
 		// Click on Login button for Navigating Login page
-		driver.findElement(By.id(login_page)).click();
+		driver.findElement(By.id(signup_page_button)).click();
 
 		// Static wait for New page to be opened
 		Thread.sleep(2000);
@@ -130,7 +130,7 @@ public class AppTest {
 		driver.hideKeyboard();
 
 		// Fill Email field
-		driver.findElement(By.id(signup_email_field)).sendKeys(username);
+		driver.findElement(By.id(signup_email_field)).sendKeys(email);
 		driver.hideKeyboard();
 
 		// Fill Password field
@@ -153,10 +153,11 @@ public class AppTest {
 
 		// Assert whether Welcome Text contains typed Username
 		Assert.assertTrue(welcome_text_element.getText().contains(username),
-				"Username: '" + username + "' is not displayed!");
+				"Username: '" + username + "' is not displayed!, The Text found is: " + welcome_text_element.getText());
 
 		// Assert whether Welcome Text contains typed Email
-		Assert.assertTrue(welcome_text_element.getText().contains(email), "Email: '" + email + "' is not displayed!");
+		Assert.assertTrue(welcome_text_element.getText().contains(email),
+				"Email: '" + email + "' is not displayed!, The Text found is: " + welcome_text_element.getText());
 	}
 
 	/**
@@ -171,7 +172,7 @@ public class AppTest {
 		String password = "password";
 
 		// Click on Login button for Navigating Login page
-		driver.findElement(By.id(login_page)).click();
+		driver.findElement(By.id(login_page_button)).click();
 
 		// Static wait for New page to be opened
 		Thread.sleep(2000);
@@ -199,15 +200,15 @@ public class AppTest {
 		Assert.assertTrue(logout_element.isDisplayed(), "Logout button is not being displayed");
 
 		// Assert whether Welcome Text contains typed Username/Email
-		Assert.assertTrue(welcome_text_element.getText().contains(username),
-				"Username/Email: '" + username + "' is not displayed!");
+		Assert.assertTrue(welcome_text_element.getText().contains(username), "Username/Email: '" + username
+				+ "' is not displayed!, The Text found is: " + welcome_text_element.getText());
 
 		// Click on Log out button
 		logout_element.click();
 
 		// Get the Login and Sign Up button elements
-		WebElement login_button_element = driver.findElement(By.id(login_button));
-		WebElement signup_button_element = driver.findElement(By.id(signup_button));
+		WebElement login_button_element = driver.findElement(By.id(login_page_button));
+		WebElement signup_button_element = driver.findElement(By.id(signup_page_button));
 
 		// Assert whether Home page appears or not by verifying Login -
 		// and Sign Up buttons present
