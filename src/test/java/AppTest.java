@@ -42,26 +42,14 @@ public class AppTest {
 	final String welcome_text_field = "com.example.pratik.myapplication:id/welcomeText";
 	final String logout_button = "com.example.pratik.myapplication:id/logout";
 
-	/**
-	 * This would return the Android WebDriver instance
-	 * 
-	 * @return
-	 * @throws MalformedURLException
-	 */
-	public AndroidDriver<WebElement> getAndroidDriver() throws MalformedURLException {
-		AndroidDriver<WebElement> driver = new AndroidDriver<WebElement>(new URL(APPIUM_SERVER_URL), caps);
-
-		// Specify the implicit wait of 5 second
-		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-		return driver;
-	}
-
 	@BeforeMethod
-	public void beforeMethod() throws MalformedURLException {
+	public void setup() throws MalformedURLException {
 		caps.setCapability("deviceName", DEVICE_NAME);
 		caps.setCapability("app", APP_PATH);
 		caps.setCapability("platformName", PLATFORM_NAME);
-		driver = getAndroidDriver();
+		driver = new AndroidDriver<WebElement>(new URL(APPIUM_SERVER_URL), caps);
+		// Specify the implicit wait of 5 second
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 
 	/**
@@ -222,7 +210,7 @@ public class AppTest {
 	}
 
 	@AfterMethod
-	public void afterMethod() {
+	public void tearDown() {
 		// close the application
 		driver.quit();
 	}
