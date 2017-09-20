@@ -7,9 +7,10 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -77,11 +78,12 @@ public class AppTest {
 		// Click on Login button for Navigating Login page
 		driver.findElement(By.id(login_page_button)).click();
 
-		// Static wait for New page to be opened
-		Thread.sleep(2000);
+		// Wait for New page to be opened
+		WebElement login_username_element = new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.presenceOfElementLocated(By.id(login_username_field)));
 
 		// Fill Username/Email field
-		driver.findElement(By.id(login_username_field)).sendKeys(username);
+		login_username_element.sendKeys(username);
 		driver.hideKeyboard();
 
 		// Fill Password field
@@ -91,11 +93,11 @@ public class AppTest {
 		// Click on Login button
 		driver.findElement(By.id(login_button)).click();
 
-		// Static wait for New page to be opened
-		Thread.sleep(2000);
+		// Wait for New page to be opened
+		WebElement welcome_text_element = new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.presenceOfElementLocated(By.id(welcome_text_field)));
 
 		// Get the welcome text and Logout button elements
-		WebElement welcome_text_element = driver.findElement(By.id(welcome_text_field));
 		WebElement logout_element = driver.findElement(By.id(logout_button));
 
 		// Assert whether elements are present or not
@@ -122,11 +124,12 @@ public class AppTest {
 		// Click on Login button for Navigating Login page
 		driver.findElement(By.id(signup_page_button)).click();
 
-		// Static wait for New page to be opened
-		Thread.sleep(2000);
+		// Wait for New page to be opened
+		WebElement signup_username_element = new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.presenceOfElementLocated(By.id(signup_username_field)));
 
 		// Fill Username field
-		driver.findElement(By.id(signup_username_field)).sendKeys(username);
+		signup_username_element.sendKeys(username);
 		driver.hideKeyboard();
 
 		// Fill Email field
@@ -140,11 +143,11 @@ public class AppTest {
 		// Click on Sign Up button
 		driver.findElement(By.id(signup_button)).click();
 
-		// Static wait for New page to be opened
-		Thread.sleep(2000);
+		// Wait for New page to be opened
+		WebElement welcome_text_element = new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.presenceOfElementLocated(By.id(welcome_text_field)));
 
 		// Get the welcome text and Logout button elements
-		WebElement welcome_text_element = driver.findElement(By.id(welcome_text_field));
 		WebElement logout_element = driver.findElement(By.id(logout_button));
 
 		// Assert whether elements are present or not
@@ -174,11 +177,12 @@ public class AppTest {
 		// Click on Login button for Navigating Login page
 		driver.findElement(By.id(login_page_button)).click();
 
-		// Static wait for New page to be opened
-		Thread.sleep(2000);
+		// Wait for New page to be opened
+		WebElement login_username_element = new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.presenceOfElementLocated(By.id(login_username_field)));
 
 		// Fill Username/Email field
-		driver.findElement(By.id(login_username_field)).sendKeys(username);
+		login_username_element.sendKeys(username);
 		driver.hideKeyboard();
 
 		// Fill Password field
@@ -188,11 +192,11 @@ public class AppTest {
 		// Click on Login button
 		driver.findElement(By.id(login_button)).click();
 
-		// Static wait for New page to be opened
-		Thread.sleep(2000);
+		// Wait for New page to be opened
+		WebElement welcome_text_element = new WebDriverWait(driver, 5)
+				.until(ExpectedConditions.presenceOfElementLocated(By.id(welcome_text_field)));
 
 		// Get the welcome text and Logout button elements
-		WebElement welcome_text_element = driver.findElement(By.id(welcome_text_field));
 		WebElement logout_element = driver.findElement(By.id(logout_button));
 
 		// Assert whether elements are present or not
