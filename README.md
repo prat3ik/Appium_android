@@ -5,7 +5,7 @@
 
 <ul>
 <li> Make sure you have Appium and Git installed, Also TestNG plugin required for IntelliJ and Eclipse IDE</li>
-<li> Make sure env. variable ANDROID_HOME is set for Android SDK repository:  <a href ="(Ref: https://stackoverflow.com/questions/37433718/could-not-find-aapt-with-appium-server/48658825#48658825)">Ref	</a></li>
+<li> Make sure env. variable ANDROID_HOME is set for Android SDK repository  <small>Ref:https://stackoverflow.com/questions/37433718/could-not-find-aapt-with-appium-server/48658825#48658825 </small></li>
 <li> Clone this Repository using this command: <strong>git clone https://github.com/prat3ik/Appium_android </strong> </li>
 <li> Appium server must be up and running</li>
 <li> Android device must be connected properly (verify using <b>adb devices</b> command on cmd)</li>
