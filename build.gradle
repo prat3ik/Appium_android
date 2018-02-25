@@ -16,25 +16,16 @@ repositories {
 }
 
 dependencies {
-	//Selenium dependency for 'main' folder
-	compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.5.3'
-	
-	//Selenium dependency for 'test' folder
-    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.3.1'
-	
-    //TestNG dependency for 'main' folder
-	compile group: 'org.testng', name: 'testng', version: '6.11'
-    
-    //TestNG dependency for 'test' folder
-    testCompile group: 'org.testng', name: 'testng', version: '6.11'
-	
-    // https://mvnrepository.com/artifact/io.appium/java-client
+    compile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.testng', name: 'testng', version: '6.11'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.9.0'
     compile group: 'io.appium', name: 'java-client', version: '5.0.3'
+    compile 'com.google.guava:guava:21.0'
 
-    // https://mvnrepository.com/artifact/io.appium/java-client
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.testng', name: 'testng', version: '6.11'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.9.0'
     testCompile group: 'io.appium', name: 'java-client', version: '5.0.3'
-
-    // This dependency is found on compile classpath of this component and consumers.
     testCompile 'com.google.guava:guava:21.0'
 }
 
@@ -52,6 +43,5 @@ test {
         outputDirectory = file("$project.buildDir//TestNG_Output")
         //required to turn on TestNG reports
         useDefaultListeners = true
-        suites 'src/test/resources/testng.xml'
     }
 }

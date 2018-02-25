@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Appium_android.iml" filepath="$PROJECT_DIR$/Appium_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Appium_android_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Appium_android_main.iml" group="Appium_android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Appium_android_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Appium_android_test.iml" group="Appium_android" />
+    </modules>
+  </component>
+</project>
